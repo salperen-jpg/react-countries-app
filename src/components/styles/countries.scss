@@ -1,0 +1,11 @@
+@import './mixins.scss';
+@import './variables.scss';
+.countries {
+  margin-top: 3rem;
+  &-center {
+    @include section-center;
+    display: grid;
+    gap: 4rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  }
+}

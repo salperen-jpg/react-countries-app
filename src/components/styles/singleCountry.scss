@@ -1,0 +1,45 @@
+@import './variables.scss';
+@import './mixins.scss';
+
+.single-country {
+  @include section-center;
+  margin: 3rem auto;
+
+  .single-btn {
+    margin-bottom: 3rem;
+    padding: 0.5rem 2rem;
+    color: #000;
+  }
+  .single-btn:hover {
+    background: rgba(0, 0, 0, 0.1);
+  }
+  h3 {
+    margin: 1rem auto;
+  }
+  span {
+    display: inline-block;
+    margin-bottom: 0.5rem;
+  }
+  .property {
+    font-weight: 600;
+  }
+  .left {
+    margin-bottom: 2rem;
+  }
+  .right {
+    margin-bottom: 1rem;
+  }
+}
+
+@media screen and (min-width: 800px) {
+  .single-country-center {
+    display: grid;
+    gap: 6rem;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+  }
+  .single-country-info-properties {
+    display: flex;
+    justify-content: space-between;
+  }
+}

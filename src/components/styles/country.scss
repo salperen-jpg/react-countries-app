@@ -1,0 +1,23 @@
+.country {
+  background: #fff;
+  text-decoration: none;
+
+  img {
+    height: 13rem;
+    object-fit: cover;
+  }
+  &-info {
+    padding: 1.5rem;
+
+    color: #000;
+  }
+  &-flex {
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    .property {
+      font-weight: 600;
+    }
+  }
+}
