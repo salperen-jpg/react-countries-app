@@ -1,5 +1,5 @@
 .country {
-  background: #fff;
+  background: var(--clr-elements);
   text-decoration: none;
 
   img {
@@ -8,8 +8,7 @@
   }
   &-info {
     padding: 1.5rem;
-
-    color: #000;
+    color: var(--clr-text-primary);
   }
   &-flex {
     margin-top: 1rem;
@@ -19,5 +18,8 @@
     .property {
       font-weight: 600;
     }
+  }
+  .other {
+    color: var(--clr-text-secondary);
   }
 }

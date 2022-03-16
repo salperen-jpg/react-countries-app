@@ -1,18 +1,38 @@
 /* 
 FONTS
 */
-@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;800&family=Nunito+Sans:wght@300;600;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:wght@400;600;800&family=Open+Sans:wght@300;600;800&display=swap');
 
 /* 
 VARIABLES
 */
 :root {
   --Dark-Blue--Dark-Mode-Elements: hsl(209, 23%, 22%);
-  --Very-Dark-Blue-Dark-Mode-Background: hsl(207, 26%, 17%);
+  --Very-Dark-Blue-Dark-Mode-Background: hsl(210, 34%, 24%);
   --Very-Dark-Blue-Light-Mode-Text: hsl(200, 15%, 8%);
   --Dark-Gray-Light-Mode-Input-: hsl(0, 0%, 52%);
   --Very-Light-Gray-Light-Mode-Background: hsl(0, 0%, 98%);
   --White-Dark-Mode-Text-Light-Mode-Elements: hsl(0, 0%, 100%);
+}
+
+.dark-theme {
+  --clr-bg: hsl(209, 36%, 17%);
+  --clr-elements: hsl(209, 23%, 22%);
+  --clr-text-primary: hsl(0, 0%, 100%);
+  --clr-text-secondary: hsl(0, 0%, 52%);
+}
+
+.light-theme {
+  --clr-bg: hsl(0, 0%, 98%);
+  --clr-elements: #fff;
+  --clr-text-primary: hsl(200, 15%, 8%);
+  --clr-text-secondary: hsl(0, 0%, 52%);
+}
+
+body {
+  background-color: var(--clr-bg);
+  color: var(--clr-text-primary);
+  font-family: 'Open Sans';
 }
 
 /* 
@@ -69,6 +89,7 @@ a {
 /* BTN CLASSES */
 .btn {
   text-transform: uppercase;
+  color: var(--clr-text-primary);
   text-decoration: none;
   padding: 0.375rem 0.775rem;
   display: inline-block;
@@ -81,16 +102,7 @@ a {
   transition: all 0.3s linear;
 }
 
-body {
-  background: var(--Very-Light-Gray-Light-Mode-Background);
-  font-family: 'Nunito Sans';
-}
-
 /* IMPLEMENT DARK MODE */
-.dark-theme {
-}
-.light-theme {
-}
 
 /* LOADING */
 .loading-container {
@@ -111,4 +123,16 @@ body {
   to {
     transform: rotate(360deg);
   }
+}
+/* ERROR */
+.error-center {
+  width: 100%;
+  min-height: 40rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+.error {
+  color: red;
 }

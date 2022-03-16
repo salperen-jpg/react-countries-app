@@ -10,15 +10,23 @@ export const AppProvider = ({ children }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState({ show: false, msg: '' });
   const [query, setQuery] = useState('');
+  const [region, setRegion] = useState('');
 
   const fetchCountries = async (url) => {
+    setIsError({ show: false, msg: '' });
     setIsLoading(true);
     try {
       const response = await fetch(url);
       const data = await response.json();
-
-      setCountries(data);
-      setIsLoading(false);
+      if (data.status === 404) {
+        console.log(1);
+        setIsError({ show: true, msg: data.msg });
+        setIsLoading(false);
+      } else {
+        setCountries(data);
+        console.log(data);
+        setIsLoading(false);
+      }
     } catch (error) {
       console.log(error);
     }
@@ -27,14 +35,28 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     if (query) {
       fetchCountries(`https://restcountries.com/v2/name/${query}`);
+    } else if (region) {
+      fetchCountries(`https://restcountries.com/v2/region/${region}`);
     } else {
       fetchCountries(`${API_ENDPOINT}/all`);
     }
-  }, [query]);
+  }, [query, region]);
+
+  const handleDropDown = (value) => {
+    setRegion(value);
+  };
 
   return (
     <CountryContext.Provider
-      value={{ countries, isLoading, isError, query, setQuery }}
+      value={{
+        countries,
+        isLoading,
+        isError,
+        query,
+        setQuery,
+        region,
+        handleDropDown,
+      }}
     >
       {children}
     </CountryContext.Provider>
