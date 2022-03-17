@@ -30,10 +30,10 @@
   }
 }
 
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 900px) {
   .single-country-center {
     display: grid;
-    gap: 6rem;
+    gap: 5rem;
     grid-template-columns: 1fr 1fr;
     align-items: center;
   }
@@ -41,4 +41,26 @@
     display: flex;
     justify-content: space-between;
   }
+}
+
+.border-countries {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  .borders {
+    display: flex;
+    gap: 2rem;
+  }
+  .single-border {
+    padding: 0.2rem 2rem;
+    background: var(--clr-elements);
+    border-radius: 5px;
+    // border: 1px solid hsl(0, 0%, 52%);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.7);
+  }
+}
+
+.language {
+  display: inline-block;
+  margin-right: 0.2rem;
 }

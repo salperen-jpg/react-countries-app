@@ -6,7 +6,7 @@ import '../styles/singleCountry.scss';
 const SingleCountry = () => {
   const { capital } = useParams();
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const [country, setCountry] = useState({});
   const [isError, setIsError] = useState(false);
 
@@ -17,11 +17,41 @@ const SingleCountry = () => {
         `https://restcountries.com/v2/capital/${capital}`
       );
       const data = await response.json();
-      setCountry(data[0]);
+      const {
+        name: countryName,
+        population,
+        nativeName,
+        topLevelDomain,
+        region,
+        borders,
+        flag: img,
+        languages,
+        currencies,
+        subregion,
+        capital: capitalOfCountry,
+      } = data[0];
+
+      const newCountry = {
+        countryName,
+        population,
+        nativeName,
+        topLevelDomain,
+        region,
+        borders,
+        flag: img,
+        capital,
+        img,
+        languages,
+        currencies,
+        subregion,
+        capitalOfCountry,
+      };
+
+      setCountry(newCountry);
+      setIsLoading(false);
     } catch (error) {
       console.log(error);
     }
-    setIsLoading(false);
   };
 
   React.useEffect(() => {
@@ -38,14 +68,17 @@ const SingleCountry = () => {
   if (isError) {
     return <div>error</div>;
   }
-
+  console.log(country);
   const {
     name: countryName,
     population,
     nativeName,
     topLevelDomain,
     region,
-    flag: img,
+    borders,
+    img,
+    languages,
+    currencies,
     subregion,
     capital: capitalOfCountry,
   } = country;
@@ -79,7 +112,7 @@ const SingleCountry = () => {
               </p>
               <p>
                 <span className='property'>Capital : </span>
-                <span>{capitalOfCountry}</span>
+                <span> {capitalOfCountry}</span>
               </p>
             </div>
             <div className='right'>
@@ -89,16 +122,37 @@ const SingleCountry = () => {
               </p>
               <p>
                 <span className='property'>Currencies : </span>
-                <span>{}</span>
+                <span>
+                  {currencies.map((currency, index) => {
+                    return <span key={index}>{currency.code}</span>;
+                  })}
+                </span>
               </p>
               <p>
                 <span className='property'>Languages : </span>
-                <span>{}</span>
+                <span>
+                  {languages.map((lan, index) => {
+                    return (
+                      <span className='language' key={index}>
+                        {lan.name}
+                      </span>
+                    );
+                  })}
+                </span>
               </p>
             </div>
           </div>
           <div className='border-countries'>
-            <span className='property'>Border Countries</span>
+            <span className='property'>Border Countries : </span>
+            <div className='borders'>
+              {borders?.map((border, index) => {
+                return (
+                  <span className='single-border' key={index}>
+                    {border}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         </div>
       </div>

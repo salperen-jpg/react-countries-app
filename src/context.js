@@ -19,12 +19,11 @@ export const AppProvider = ({ children }) => {
       const response = await fetch(url);
       const data = await response.json();
       if (data.status === 404) {
-        console.log(1);
         setIsError({ show: true, msg: data.msg });
         setIsLoading(false);
       } else {
         setCountries(data);
-        console.log(data);
+
         setIsLoading(false);
       }
     } catch (error) {
