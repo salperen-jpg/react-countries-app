@@ -1,0 +1,15 @@
+.error-page {
+  min-height: calc(100vh - 5rem);
+  width: 90vw;
+  margin: 0 auto;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  .error-btn {
+    margin-top: 2rem;
+  }
+  img {
+    max-height: 25rem;
+    object-fit: cover;
+  }
+}

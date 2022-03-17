@@ -16,8 +16,8 @@ VARIABLES
 }
 
 .dark-theme {
-  --clr-bg: hsl(209, 36%, 17%);
-  --clr-elements: hsl(209, 23%, 22%);
+  --clr-bg: #1e2139;
+  --clr-elements: #282d4d;
   --clr-text-primary: hsl(0, 0%, 100%);
   --clr-text-secondary: hsl(0, 0%, 52%);
 }
