@@ -3,6 +3,7 @@ import { useCountryContext } from '../context';
 import Country from './Country';
 import './styles/countries.scss';
 import Error from './Error';
+
 const Countries = () => {
   const { countries, isLoading, isError } = useCountryContext();
 
@@ -25,7 +26,7 @@ const Countries = () => {
   return (
     <section className='countries'>
       <div className='countries-center'>
-        {countries.map((country, index) => {
+        {countries?.map((country, index) => {
           return <Country {...country} key={index} />;
         })}
       </div>

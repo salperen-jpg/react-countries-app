@@ -27,7 +27,7 @@ const Search = () => {
           <option value='' name=''>
             Filter by region
           </option>
-          <option value='Africa'>Africa</option>
+
           <option value='Africa'>Africa</option>
           <option value='Asia'>Asia</option>
           <option value='Europe'>Europe</option>

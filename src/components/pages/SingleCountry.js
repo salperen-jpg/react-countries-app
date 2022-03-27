@@ -2,61 +2,18 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import '../styles/singleCountry.scss';
+import useFetch from '../useFetch';
 
 const SingleCountry = () => {
   const { capital } = useParams();
 
-  const [isLoading, setIsLoading] = useState(true);
-  const [country, setCountry] = useState({});
-  const [isError, setIsError] = useState(false);
+  const {
+    countries: country,
+    isLoading,
+    isError,
+  } = useFetch(`capital/${capital}`);
 
-  const fetchCountry = async () => {
-    setIsLoading(true);
-    try {
-      const response = await fetch(
-        `https://restcountries.com/v2/capital/${capital}`
-      );
-      const data = await response.json();
-      const {
-        name: countryName,
-        population,
-        nativeName,
-        topLevelDomain,
-        region,
-        borders,
-        flag: img,
-        languages,
-        currencies,
-        subregion,
-        capital: capitalOfCountry,
-      } = data[0];
-
-      const newCountry = {
-        countryName,
-        population,
-        nativeName,
-        topLevelDomain,
-        region,
-        borders,
-        flag: img,
-        capital,
-        img,
-        languages,
-        currencies,
-        subregion,
-        capitalOfCountry,
-      };
-
-      setCountry(newCountry);
-      setIsLoading(false);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  React.useEffect(() => {
-    fetchCountry();
-  }, []);
+  console.log(country);
 
   if (isLoading) {
     return (

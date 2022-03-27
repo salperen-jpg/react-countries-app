@@ -1,47 +1,32 @@
 import axios from 'axios';
 import React, { useState, useEffect, useContext } from 'react';
+import useFetch from './components/useFetch';
 
 const API_ENDPOINT = 'https://restcountries.com/v3.1';
 
 const CountryContext = React.createContext();
 
 export const AppProvider = ({ children }) => {
-  const [countries, setCountries] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isError, setIsError] = useState({ show: false, msg: '' });
+  const [term, setTerm] = useState('all');
+
   const [query, setQuery] = useState('');
   const [region, setRegion] = useState('');
 
-  const fetchCountries = async (url) => {
-    setIsError({ show: false, msg: '' });
-    setIsLoading(true);
-    try {
-      const response = await fetch(url);
-      const data = await response.json();
-      if (data.status === 404) {
-        setIsError({ show: true, msg: data.msg });
-        setIsLoading(false);
-      } else {
-        setCountries(data);
-
-        setIsLoading(false);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   useEffect(() => {
     if (query) {
-      fetchCountries(`https://restcountries.com/v2/name/${query}`);
-    } else if (region) {
-      fetchCountries(`https://restcountries.com/v2/region/${region}`);
-    } else {
-      fetchCountries(`${API_ENDPOINT}/all`);
+      setTerm(`name/${query}`);
+    }
+    if (region) {
+      setTerm(`region/${region}`);
     }
   }, [query, region]);
 
+  const { isLoading, isError, countries } = useFetch(term);
+
   const handleDropDown = (value) => {
+    if (!value) {
+      setTerm('all');
+    }
     setRegion(value);
   };
 
