@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 const API_ENDPOINT = 'https://restcountries.com/v2/';
 
 const useFetch = (urlParams) => {
-  const [countries, setCountries] = useState([]);
+  const [countries, setCountries] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState({ show: false, msg: '' });
 
@@ -13,8 +13,8 @@ const useFetch = (urlParams) => {
     try {
       const response = await fetch(url);
       const data = await response.json();
-      console.log(data);
-      if (data.status === 404) {
+
+      if (data.status === 404 || data.message === 'Page Not Found') {
         setIsError({ show: true, msg: data.msg });
         setIsLoading(false);
       } else {
@@ -28,14 +28,6 @@ const useFetch = (urlParams) => {
   useEffect(() => {
     let url = `${API_ENDPOINT}${urlParams}`;
     fetchCountries(url);
-    console.log(url);
-    // if (query) {
-    //   fetchCountries(`https://restcountries.com/v2/name/${query}`);
-    // } else if (region) {
-    //   fetchCountries(`https://restcountries.com/v2/region/${region}`);
-    // } else {
-    //   fetchCountries(`${API_ENDPOINT}/all`);
-    // }
   }, [urlParams]);
 
   return { countries, isLoading, isError };

@@ -13,7 +13,9 @@ const SingleCountry = () => {
     isError,
   } = useFetch(`capital/${capital}`);
 
-  console.log(country);
+  if (isError.show) {
+    return <div>W</div>;
+  }
 
   if (isLoading) {
     return (
@@ -22,9 +24,7 @@ const SingleCountry = () => {
       </div>
     );
   }
-  if (isError) {
-    return <div>error</div>;
-  }
+
   console.log(country);
   const {
     name: countryName,
@@ -33,12 +33,12 @@ const SingleCountry = () => {
     topLevelDomain,
     region,
     borders,
-    img,
+    flag: img,
     languages,
     currencies,
     subregion,
     capital: capitalOfCountry,
-  } = country;
+  } = country[0];
 
   return (
     <article className='single-country'>
